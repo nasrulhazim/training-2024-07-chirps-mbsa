@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/chirps', [ChirpController::class, 'index']);
+Route::get('/chirps/{chirp}', [ChirpController::class, 'show']);
