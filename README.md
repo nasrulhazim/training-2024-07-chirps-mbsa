@@ -72,3 +72,9 @@ Return list of chirps in `Api/ChirpController` in `index`:
 ```php
 return new ChirpCollection(Chirp::all());
 ```
+
+Return chirp details in `Api/ChirpController` in `show`:
+
+```php
+return new ChirpResource(Chirp::findOrFail($id));
+```
