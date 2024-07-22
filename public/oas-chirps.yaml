@@ -30,6 +30,13 @@ paths:
         - Auth
       description: Logint to Chirpt
       operationId: login
+      parameters:
+        - in: header
+          name: Accept
+          required: true
+          schema:
+            type: string
+            example: application/json
       requestBody:
         required: true
         content:
@@ -69,6 +76,13 @@ paths:
         - Auth
       description: Register a new user
       operationId: register
+      parameters:
+        - in: header
+          name: Accept
+          required: true
+          schema:
+            type: string
+            example: application/json
       requestBody:
         required: true
         content:
@@ -113,6 +127,13 @@ paths:
         - Auth
       description: Logout the current user
       operationId: logout
+      parameters:
+        - in: header
+          name: Accept
+          required: true
+          schema:
+            type: string
+            example: application/json
       security:
         - bearerAuth: []
       responses:
@@ -125,6 +146,13 @@ paths:
         - Chirp
       description: Return list of chirps
       operationId: getChirpList
+      parameters:
+        - in: header
+          name: Accept
+          required: true
+          schema:
+            type: string
+            example: application/json
       responses:
         '200':
           description: successful operation
@@ -139,6 +167,13 @@ paths:
         - Chirp
       description: Create new chirp
       operationId: createNewChirp
+      parameters:
+        - in: header
+          name: Accept
+          required: true
+          schema:
+            type: string
+            example: application/json
       requestBody:
         description: Create a new chirp
         content:
@@ -166,6 +201,12 @@ paths:
       description: Return list of chirps
       operationId: getChirpById
       parameters:
+        - in: header
+          name: Accept
+          required: true
+          schema:
+            type: string
+            example: application/json
         - name: chirp
           in: path
           description: ID of Chirp
@@ -189,6 +230,12 @@ paths:
       description: Update an existing chirp by Id
       operationId: updateChirp
       parameters:
+        - in: header
+          name: Accept
+          required: true
+          schema:
+            type: string
+            example: application/json
         - name: chirp
           in: path
           description: ID of Chirp
