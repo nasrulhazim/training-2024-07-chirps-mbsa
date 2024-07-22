@@ -135,9 +135,13 @@ Next, open up your Insomnia, create new collection. Import collection from [here
 Then open up the Enviroment settings, update all environment to add the `base_url`:
 
 ```json
-	"base_url": "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
+ "base_url": "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
 ```
 
 Now you can test your API endpoints for register, login and logout.
 
+## React App
 
+```bash
+php artisan config:publish cors
+```

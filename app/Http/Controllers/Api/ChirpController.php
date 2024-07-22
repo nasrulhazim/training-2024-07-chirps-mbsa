@@ -16,7 +16,7 @@ class ChirpController extends Controller
      */
     public function index()
     {
-        return new ChirpCollection(Chirp::all());
+        return new ChirpCollection(Chirp::with('user')->get());
     }
 
     /**
@@ -48,7 +48,7 @@ class ChirpController extends Controller
      */
     public function show(string $id)
     {
-        return new ChirpResource(Chirp::findOrFail($id));
+        return new ChirpResource(Chirp::with('user')->findOrFail($id));
     }
 
     /**
