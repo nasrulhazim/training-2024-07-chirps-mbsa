@@ -31,7 +31,7 @@ class ChirpController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return new ChirpResource(Chirp::findOrFail($id))
     }
 
     /**
