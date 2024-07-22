@@ -139,3 +139,5 @@ Then open up the Enviroment settings, update all environment to add the `base_ur
 ```
 
 Now you can test your API endpoints for register, login and logout.
+
+

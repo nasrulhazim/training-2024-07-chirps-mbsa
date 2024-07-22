@@ -13,6 +13,7 @@ class Chirp extends Model implements Auditable
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'message',
     ];
 

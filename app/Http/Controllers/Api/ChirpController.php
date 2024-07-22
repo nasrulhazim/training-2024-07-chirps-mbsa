@@ -7,6 +7,7 @@ use App\Http\Resources\ChirpCollection;
 use App\Http\Resources\ChirpResource;
 use App\Models\Chirp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ChirpController extends Controller
 {
@@ -23,7 +24,23 @@ class ChirpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'message' => 'required|min:10|max:250',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $chirp = Chirp::create([
+            'user_id' => $request->user()->id,
+            'message' => $request->message,
+        ]);
+
+        return new ChirpResource($chirp);
     }
 
     /**
@@ -39,14 +56,39 @@ class ChirpController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'message' => 'required|min:10|max:250',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 422);
+        }
+
+        $chirp = Chirp::findOrFail($id);
+
+        $chirp->update([
+            'message' => $request->message,
+        ]);
+
+        $chirp->refresh();
+
+        return new ChirpResource($chirp);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
-        //
+        $chirp = Chirp::where('user_id', $request->user()->id)->findOrFail($id);
+
+        $chirp->delete();
+
+        return response()->json([
+            'message' => 'You have successfully delete the record.'
+        ]);
     }
 }

@@ -195,6 +195,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/ValidationError'
   /chirps/{chirp}:
+    delete:
+      tags:
+        - Chirp
+      description: Delete a of chirp owned by user
+      operationId: deleteChirpById
+      parameters:
+        - in: header
+          name: Accept
+          required: true
+          schema:
+            type: string
+            example: application/json
+        - name: chirp
+          in: path
+          description: ID of Chirp
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseMessage'
     get:
       tags:
         - Chirp
@@ -275,6 +301,11 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+    ApiResponseMessage:
+      type: object
+      properties:
+        message:
+          type: string
     InvalidCredential:
       type: object
       properties:

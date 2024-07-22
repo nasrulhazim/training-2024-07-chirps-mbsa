@@ -14,7 +14,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/chirps', [ChirpController::class, 'index']);
+    Route::post('/chirps', [ChirpController::class, 'store']);
     Route::get('/chirps/{chirp}', [ChirpController::class, 'show']);
+    Route::put('/chirps/{chirp}', [ChirpController::class, 'update']);
+    Route::delete('/chirps/{chirp}', [ChirpController::class, 'destroy']);
 });
 
 
