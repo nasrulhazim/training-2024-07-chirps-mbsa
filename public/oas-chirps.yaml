@@ -153,6 +153,8 @@ paths:
           schema:
             type: string
             example: application/json
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: successful operation
@@ -174,6 +176,8 @@ paths:
           schema:
             type: string
             example: application/json
+      security:
+        - bearerAuth: []
       requestBody:
         description: Create a new chirp
         content:
@@ -214,6 +218,8 @@ paths:
           schema:
             type: integer
             format: int64
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: successful operation
@@ -226,6 +232,8 @@ paths:
         - Chirp
       description: Return list of chirps
       operationId: getChirpById
+      security:
+        - bearerAuth: []
       parameters:
         - in: header
           name: Accept
@@ -255,6 +263,8 @@ paths:
       summary: Update an existing chirp
       description: Update an existing chirp by Id
       operationId: updateChirp
+      security:
+        - bearerAuth: []
       parameters:
         - in: header
           name: Accept
