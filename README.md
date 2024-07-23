@@ -135,11 +135,11 @@ Then open up the Enviroment settings, update base environment as following:
 
 ```json
  {
-	"scheme": "http",
-	"base_path": "/api",
-	"host": "127.0.0.1",
-	"bearerToken": "bearerToken",
-	"base_url": "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
+ "scheme": "http",
+ "base_path": "/api",
+ "host": "127.0.0.1",
+ "bearerToken": "bearerToken",
+ "base_url": "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
 }
 ```
 
@@ -149,4 +149,10 @@ Now you can test your API endpoints for register, login and logout.
 
 ```bash
 php artisan config:publish cors
+```
+
+Set the in `config/cors.php`:
+
+```php
+'supports_credentials' => true,
 ```
