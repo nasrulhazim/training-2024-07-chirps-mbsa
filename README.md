@@ -132,10 +132,16 @@ class User extends Authenticatable
 
 Next, open up your Insomnia, create new collection. Import collection from [here](public/oas-chirps.yaml).
 
-Then open up the Enviroment settings, update all environment to add the `base_url`:
+Then open up the Enviroment settings, update base environment as following:
 
 ```json
- "base_url": "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
+ {
+	"scheme": "http",
+	"base_path": "/api",
+	"host": "127.0.0.1",
+	"bearerToken": "bearerToken",
+	"base_url": "{{ _.scheme }}://{{ _.host }}{{ _.base_path }}"
+}
 ```
 
 Now you can test your API endpoints for register, login and logout.
