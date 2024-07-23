@@ -123,11 +123,10 @@ In `app/Models/User.php`, add `HasApiTokens` trait:
 
 ```php
 use Laravel\Sanctum\HasApiTokens;
-use Yadahan\AuthenticationLog\AuthenticationLogable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, AuthenticationLogable, HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens;
 ```
 
 Next, open up your Insomnia, create new collection. Import collection from [here](public/oas-chirps.yaml).
