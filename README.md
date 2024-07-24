@@ -159,7 +159,21 @@ Set the in `config/cors.php`:
 
 ## Unit Test (Pest)
 
+Install Pest:
+
 ```bash
 composer remove phpunit/phpunit
 composer require pestphp/pest --dev --with-all-dependencies
+```
+
+Setup Pest:
+
+```bash
+./vendor/bin/pest --init
+```
+
+Create API unit test:
+
+```bash
+php artisan make:test ApiTest --pest
 ```
