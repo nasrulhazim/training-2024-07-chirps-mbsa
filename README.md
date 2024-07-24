@@ -168,8 +168,16 @@ composer require pestphp/pest --dev --with-all-dependencies
 
 Setup Pest:
 
+on Linux / Mac:
+
 ```bash
 ./vendor/bin/pest --init
+```
+
+on Windows, run:
+
+```bash
+vendor\bin\pest.bat --init
 ```
 
 Create API unit test:
