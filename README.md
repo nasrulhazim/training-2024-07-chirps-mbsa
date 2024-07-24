@@ -156,3 +156,10 @@ Set the in `config/cors.php`:
 ```php
 'supports_credentials' => true,
 ```
+
+## Unit Test (Pest)
+
+```bash
+composer remove phpunit/phpunit
+composer require pestphp/pest --dev --with-all-dependencies
+```
