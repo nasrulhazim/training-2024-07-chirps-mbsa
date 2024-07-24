@@ -187,3 +187,15 @@ php artisan make:test ApiTest --pest
 ```
 
 Update your unit test as in [here](tests/Feature/ApiTest.php).
+
+To run the unit test, specifically to `tests/Feature/ApiTest.php`:
+
+```bash
+vendor/bin/pest tests/Feature/ApiTest.php
+```
+
+or on Windows:
+
+```bash
+vendor\bin\pest.bat tests/Feature/ApiTest.php
+```
