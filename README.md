@@ -185,3 +185,5 @@ Create API unit test:
 ```bash
 php artisan make:test ApiTest --pest
 ```
+
+Update your unit test as in [here](tests/Feature/ApiTest.php).
