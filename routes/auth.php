@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -56,4 +57,62 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+});
+
+// routes/web.php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+
+Route::get('/', function () {
+    $query = http_build_query([
+        'client_id' => env('OAUTH_CLIENT_ID'),
+        'redirect_uri' => env('OAUTH_REDIRECT_URI'),
+        'response_type' => 'code',
+        'scope' => '',
+    ]);
+
+    // dd(env('OAUTH_SERVER_URL') . '/oauth/authorize?' . $query);
+
+    return redirect(env('OAUTH_SERVER_URL') . '/oauth/authorize?' . $query);
+});
+//dylep@mailinator.com
+Route::get('/oauth/callback', function (Request $request) {
+    $response = Http::asForm()->post(env('OAUTH_SERVER_URL') . '/oauth/token', [
+        'grant_type' => 'authorization_code',
+        'client_id' => env('OAUTH_CLIENT_ID'),
+        'client_secret' => env('OAUTH_CLIENT_SECRET'),
+        'redirect_uri' => env('OAUTH_REDIRECT_URI'),
+        'code' => $request->code,
+    ]);
+
+    try {
+        $data = $response->json();
+        $accessToken = data_get($data, 'access_token');
+
+        $response = Http::withToken($accessToken)->get(env('OAUTH_SERVER_URL') . '/api/user');
+
+        abort_if(! $response->ok(), 'Invalid Crendentials');
+
+        $data = $response->json();
+
+        if(! User::where('email', data_get($data, 'email'))->exists()) {
+            $user = User::create([
+                'name' => data_get($data, 'name'),
+                'email' => data_get($data, 'email'),
+                'password' => Hash::make(date('Ymd').rand(1,10000))
+            ]);
+        } else {
+            $user = User::where('email', data_get($data, 'email'))->first();
+        }
+
+        Auth::login($user);
+
+        return redirect('profile');
+
+    } catch (\Throwable $th) {
+        abort(401, $th->getMessage());
+    }
 });
