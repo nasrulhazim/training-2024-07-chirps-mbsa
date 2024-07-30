@@ -41,6 +41,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        // instruct laravel, to dispatch registered event.
         event(new Registered($user));
 
         Auth::login($user);

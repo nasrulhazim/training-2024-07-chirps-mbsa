@@ -22,6 +22,8 @@ class SendWelcomeNotification
      */
     public function handle(Registered $event): void
     {
-        $event->user->notify(new WelcomeNotification);
+        $user = $event->user;
+
+        $user->notify(new WelcomeNotification);
     }
 }
