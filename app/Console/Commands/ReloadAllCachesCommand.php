@@ -25,11 +25,13 @@ class ReloadAllCachesCommand extends Command
      */
     public function handle()
     {
-        $this->call('config:clear');
-        $this->call('view:clear');
-        $this->call('cache:clear');
-        $this->call('route:clear');
-        $this->call('schedule:clear-cache');
-        $this->call('auth:clear-resets');
+        $this->callSilent('config:clear');
+        $this->callSilent('view:clear');
+        $this->callSilent('cache:clear');
+        $this->callSilent('route:clear');
+        $this->callSilent('schedule:clear-cache');
+        $this->callSilent('auth:clear-resets');
+
+        $this->components->info('All caches has been cleared.');
     }
 }
