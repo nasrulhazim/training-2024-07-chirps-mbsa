@@ -293,3 +293,14 @@ php artisan make:listener SendWelcomeNotification --event=\\Illuminate\\Auth\\Ev
 Update the listener as in [here](app/Listeners/SendWelcomeNotification.php).
 
 Then go and register new account. Any new registration will get notification.
+
+### Practice
+
+Create an artisan command which send daily quote to all users. Make use of the custom artisan command, notification, event & listeners.
+
+```bash
+php artisan make:command SendDailyQuoteCommand
+php artisan make:notification SendQuoteNotification --markdown=notifications.quote
+php artisan make:event SendQuote
+php artisan make:listener SendQuoteNotification --event=SendQuote
+```
