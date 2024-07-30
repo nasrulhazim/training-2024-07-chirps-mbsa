@@ -11,16 +11,14 @@ class ReloadDatabaseCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'reload:db
-                                {--m|demo : Seed demo data}
-                                {--d|dev : Seed development data}';
+    protected $signature = 'reload:db';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Reload all caches and database';
+    protected $description = 'Remigrate database and seed relevant data.';
 
     /**
      * Execute the console command.
