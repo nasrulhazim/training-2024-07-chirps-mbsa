@@ -255,3 +255,29 @@ php artisan make:mail ThankYou --markdown
 Update the view as in [here](resources/views/mail/thank-you.blade.php).
 
 Use `routes/console.php`, copy as in [here](routes/console.php).
+
+
+### Notification
+
+Create `notifications` table.
+
+```bash
+php artisan make:notifications-table
+php artisan migrate
+```
+
+Create notification class:
+
+```bash
+php artisan make:notification WelcomeNotification --markdown=notifications.welcome
+```
+
+Then update our `app/Notifications/WelcomeNotification.php` as in [here](app/Notifications/WelcomeNotification.php).
+
+Then update the view for the notifications as in [here](resources/views/notifications/welcome.blade.php).
+
+Send notification, by update `routes/console.php` as in [here](routes/console.php).
+
+```bash
+php artisan test:notify
+```

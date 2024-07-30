@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Chirp::class);
     }
+
+    public function routeSms()
+    {
+        // return phone number
+    }
 }
