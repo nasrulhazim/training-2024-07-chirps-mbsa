@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Database\Seeders\DemoSeeder;
 use Illuminate\Console\Command;
 
 class ReloadDatabaseCommand extends Command
@@ -11,7 +12,8 @@ class ReloadDatabaseCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'reload:db';
+    protected $signature = 'reload:db
+                                {--d|demo : Seed demo data}';
 
     /**
      * The console command description.
@@ -31,11 +33,18 @@ class ReloadDatabaseCommand extends Command
             return 0;
         }
 
-        $this->call('migrate:fresh', [
+        $this->callSilent('migrate:fresh', [
             '--seed' => true,
         ]);
 
-        $this->info('Successfully reload database.');
+        if($this->option('demo')) {
+            $this->callSilent('db:seed', [
+                '--class' => DemoSeeder::class,
+            ]);
+            $this->components->info('Demo data has been seeded.');
+        }
+
+        $this->components->info('Successfully reload database.');
 
         return Command::SUCCESS;
     }
