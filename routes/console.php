@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\ThankYou;
 use App\Mail\WelcomeMail;
 use App\Models\User;
 use Illuminate\Foundation\Inspiring;
@@ -12,7 +13,10 @@ Artisan::command('inspire', function () {
 
 Artisan::command('test:mail', function() {
     $user = User::first();
-    Mail::to('nasrul@gmail.com')
+    Mail::to($user->email)
         ->send(new WelcomeMail($user));
-    $this->components->info('mail sent');
+
+    Mail::to($user->email)
+        ->send(new ThankYou);
+    $this->components->info('Welcome & Thank you email sent.');
 });
