@@ -239,3 +239,11 @@ php artisan make:view mail.welcome
 Update the mail view as in [here](resources/views/mail/welcome.blade.php).
 
 Use `routes/console.php`, copy as in [here](routes/console.php).
+
+Test the email:
+
+```bash
+php artisan test:email
+```
+
+Open your browser at [http://127.0.0.1:8025](http://127.0.0.1:8025) to see new welcome email.
