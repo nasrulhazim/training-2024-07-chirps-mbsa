@@ -199,3 +199,19 @@ or on Windows:
 ```bash
 vendor\bin\pest.bat tests/Feature/ApiTest.php
 ```
+
+## Day 8
+
+Create artisan command:
+
+```bash
+php artisan make:command ReloadAllCachesCommand
+```
+
+Then update the codes as in [here](app/Console/Commands/ReloadAllCachesCommand.php).
+
+To use the command:
+
+```bash
+php artisan reload:caches
+```
