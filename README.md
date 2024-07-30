@@ -202,7 +202,6 @@ vendor\bin\pest.bat tests/Feature/ApiTest.php
 
 ## Day 8
 
-
 ### Artisan Command
 
 Create artisan command:
@@ -218,7 +217,6 @@ To use the command:
 ```bash
 php artisan reload:caches
 ```
-
 
 ### Mail
 
@@ -247,3 +245,11 @@ php artisan test:mail
 ```
 
 Open your browser at [http://127.0.0.1:8025](http://127.0.0.1:8025) to see new welcome email.
+
+**Create Markdown Mail**
+
+```bash
+php artisan make:mail ThankYou --markdown
+```
+
+Update the view as in [here](resources/views/mail/thank-you.blade.php).
