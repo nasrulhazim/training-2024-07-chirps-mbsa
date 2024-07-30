@@ -281,3 +281,15 @@ Send notification, by update `routes/console.php` as in [here](routes/console.ph
 ```bash
 php artisan test:notify
 ```
+
+### Event & Listener
+
+Create listener for registered user event:
+
+```bash
+php artisan make:listener SendWelcomeNotification --event=\\Illuminate\\Auth\\Events\\Registered
+```
+
+Update the listener as in [here](app/Listeners/SendWelcomeNotification.php).
+
+Then go and register new account. Any new registration will get notification.
