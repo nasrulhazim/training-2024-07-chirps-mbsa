@@ -12,8 +12,7 @@ class ReloadAllCommand extends Command
      * @var string
      */
     protected $signature = 'reload:all
-                                {--m|demo : Seed demo data}
-                                {--d|dev : Seed development data}';
+                                {--m|demo : Seed demo data}';
 
     /**
      * The console command description.
@@ -28,12 +27,14 @@ class ReloadAllCommand extends Command
     public function handle()
     {
         $this->call('reload:cache');
-        $this->call('reload:db');
+        $this->call('reload:db', [
+            '--demo' => $this->option('demo') ? true : false
+        ]);
 
         $this->call('storage:link', [
             '--force' => true,
         ]);
 
-        $this->info('Successfully reload caches and database.');
+        $this->components->info('Successfully reload caches and database.');
     }
 }
