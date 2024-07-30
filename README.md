@@ -230,4 +230,12 @@ php artisan make:mail WelcomeMail
 
 Update class as in [here](app/Mail/WelcomeMail.php).
 
+Create view for welcome mail:
+
+```bash
+php artisan make:view mail.welcome
+```
+
+Update the mail view as in [here](resources/views/mail/welcome.blade.php).
+
 Use `routes/console.php`, copy as in [here](routes/console.php).
