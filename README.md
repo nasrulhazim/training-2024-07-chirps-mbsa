@@ -202,6 +202,9 @@ vendor\bin\pest.bat tests/Feature/ApiTest.php
 
 ## Day 8
 
+
+### Artisan Command
+
 Create artisan command:
 
 ```bash
@@ -215,3 +218,16 @@ To use the command:
 ```bash
 php artisan reload:caches
 ```
+
+
+### Mail
+
+Create mail class:
+
+```bash
+php artisan make:mail WelcomeMail
+```
+
+Update class as in [here](app/Mail/WelcomeMail.php).
+
+Use `routes/console.php`, copy as in [here](routes/console.php).
