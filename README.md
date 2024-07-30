@@ -253,3 +253,5 @@ php artisan make:mail ThankYou --markdown
 ```
 
 Update the view as in [here](resources/views/mail/thank-you.blade.php).
+
+Use `routes/console.php`, copy as in [here](routes/console.php).
