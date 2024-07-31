@@ -337,10 +337,80 @@ In [config/services.php](config/services.php), add the following:
 ],
 ```
 
-In [routes](routes/web.php), disable the following section by comment it:
+In [routes/web.php](routes/web.php), disable the following section by comment it:
 
 ```php
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+```
+
+In [routes/auth.php](routes/auth.php), add the following codes, which handle the OAuth process:
+
+```php
+/**
+ * Handle OAuth
+ */
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
+
+Route::get('/', function () {
+    $query = http_build_query([
+        'client_id' => config('services.passport.client_id'),
+        'redirect_uri' => config('services.passport.redirect_uri'),
+        'response_type' => 'code',
+        'scope' => '',
+    ]);
+
+    // redirect to OAuth Server, then require to login/register.
+    // after that require to authorize the chirper app to access.
+    return redirect(
+        config('services.passport.url') . '/oauth/authorize?' . $query
+    );
+});
+
+Route::get('/oauth/callback', function (Request $request) {
+    // get the access token
+    $response = Http::asForm()->post(config('services.passport.url') . '/oauth/token', [
+        'grant_type' => 'authorization_code',
+        'client_id' => config('services.passport.client_id'),
+        'client_secret' => config('services.passport.client_secret'),
+        'redirect_uri' => config('services.passport.redirect_uri'),
+        'code' => $request->code,
+    ]);
+
+    try {
+        $data = $response->json();
+        $accessToken = data_get($data, 'access_token');
+
+        // use access token to get user's details
+        $response = Http::withToken($accessToken)->get(config('services.passport.url') . '/api/user');
+
+        abort_if(! $response->ok(), 'Invalid Crendentials');
+
+        $data = $response->json();
+
+        // if user's not exists, create it, else retrieve it.
+        if(! User::where('email', data_get($data, 'email'))->exists()) {
+            $user = User::create([
+                'name' => data_get($data, 'name'),
+                'email' => data_get($data, 'email'),
+                'password' => Hash::make(date('Ymd').rand(1,10000))
+            ]);
+        } else {
+            $user = User::where('email', data_get($data, 'email'))->first();
+        }
+
+        // login user
+        Auth::login($user);
+
+        // redirect to profile page.
+        return redirect('profile');
+
+    } catch (\Throwable $th) {
+        abort(401, $th->getMessage());
+    }
+});
 ```
