@@ -317,8 +317,12 @@ Update `.env` to point to OAuth Server(Laravel Passport), the Client ID and Secr
 OAUTH_SERVER_URL=http://127.0.0.1:8000
 
 # App's client id and secret
-OAUTH_CLIENT_ID=9
-OAUTH_CLIENT_SECRET=US3Z34MVsbpLdIiZWutPuAao4zahiWuPN2uy3RC1
+
+## Get this value from php artisan passport:client - Client ID
+OAUTH_CLIENT_ID=
+
+## Get this value from php artisan passport:client - Client Secret
+OAUTH_CLIENT_SECRET=
 
 # App's callback / redirect URL
 OAUTH_REDIRECT_URI=http://127.0.0.1:8001/oauth/callback
