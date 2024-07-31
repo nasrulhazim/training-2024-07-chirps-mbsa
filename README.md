@@ -304,3 +304,19 @@ php artisan make:notification SendQuoteNotification --markdown=notifications.quo
 php artisan make:event SendQuote
 php artisan make:listener SendQuoteNotification --event=SendQuote
 ```
+
+### Passport Integration
+
+Update `.env` to point to OAuth Server(Laravel Passport), the Client ID and Secret which generated using `php artisan passport:client` command in OAuth Server and redirect URI which to handle the authentication process after approval from OAuth Server.
+
+```plaintext
+# OAuth Server URL
+OAUTH_SERVER_URL=http://127.0.0.1:8000
+
+# App's client id and secret
+OAUTH_CLIENT_ID=9
+OAUTH_CLIENT_SECRET=US3Z34MVsbpLdIiZWutPuAao4zahiWuPN2uy3RC1
+
+# App's callback / redirect URL
+OAUTH_REDIRECT_URI=http://127.0.0.1:8001/oauth/callback
+```
