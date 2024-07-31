@@ -307,6 +307,9 @@ php artisan make:listener SendQuoteNotification --event=SendQuote
 
 ### Passport Integration
 
+
+#### `.env` Configuration
+
 Update `.env` to point to OAuth Server(Laravel Passport), the Client ID and Secret which generated using `php artisan passport:client` command in OAuth Server and redirect URI which to handle the authentication process after approval from OAuth Server.
 
 ```plaintext
@@ -319,4 +322,25 @@ OAUTH_CLIENT_SECRET=US3Z34MVsbpLdIiZWutPuAao4zahiWuPN2uy3RC1
 
 # App's callback / redirect URL
 OAUTH_REDIRECT_URI=http://127.0.0.1:8001/oauth/callback
+```
+
+#### Handling OAuth
+
+In [config/services.php](config/services.php), add the following:
+
+```php
+'passport' => [
+    'url' => env('OAUTH_SERVER_URL'),
+    'client_id' => env('OAUTH_CLIENT_ID'),
+    'client_secret' => env('OAUTH_CLIENT_SECRET'),
+    'redirect_url' => env('OAUTH_REDIRECT_URI'),
+],
+```
+
+In [routes](routes/web.php), disable the following section by comment it:
+
+```php
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 ```
